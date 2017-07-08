@@ -5,7 +5,7 @@ ifeq ($(PE_ENV),PGI)
 	# -Mifno outputs extra diagnostic information
 	# -hacc generates accelerated kernels from openacc directives
 	FFLAGS  = -acc=verystrict
-	FFLAGS += -ta=tesla:cuda8.0
+	FFLAGS += -ta=tesla:cc60
 	#FFLAGS  = -Minfo=accel
 	FFLAGS += -Mpreprocess # use c-style preprocessing
 	FFLAGS += -g # debug flags
