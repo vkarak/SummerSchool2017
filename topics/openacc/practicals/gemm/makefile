@@ -21,7 +21,7 @@ ifeq ($(PE_ENV), PGI)
 	CXX = pgc++
 	CXXFLAGS = -DPGI -std=c++11 -O3 -mp=allcores -acc -Minfo=accel -ta=tesla:cc60
 	FCFLAGS  = -O3 -mp=allcores -acc -Minfo=accel -ta=tesla:cc60
-	LDFLAGS  += -L$(CRAY_CUDATOOLKIT_DIR)/lib64 -lcudart -lcublas
+	LDFLAGS  += -L$(CRAY_CUDATOOLKIT_DIR)/lib64 -lcudart -lcublas -ta=tesla:cc60
 endif
 
 ifeq ($(PE_ENV), GNU)

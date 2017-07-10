@@ -20,7 +20,7 @@ ifeq ($(PE_ENV), PGI)
 	FC  = pgf90
 	CXXFLAGS = -DPGI -std=c++11 -O3 -acc -Minfo=accel -ta=tesla:cc60
 	FCFLAGS  = -O3 -acc -Minfo=accel -ta=tesla:cc60
-	LDFLAGS += -L$(CRAY_CUDATOOLKIT_DIR)/lib64 -lcudart
+	LDFLAGS += -L$(CRAY_CUDATOOLKIT_DIR)/lib64 -lcudart -ta=tesla:cc60
 endif
 
 ifeq ($(PE_ENV), GNU)
@@ -43,13 +43,13 @@ blur.openacc: blur_openacc.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
 
 blur.openacc.fort: blur_openacc.f90 util.o
-	$(FC) $(FCFLAGS) $< util.o -o $@
+	$(FC) $(FCFLAGS) $< util.o -o $@ $(LDFLAGS)
 
 dot.openacc: dot_openacc.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $< -o $@ $(LDFLAGS)
 
 dot.openacc.fort: dot_openacc.f90 util.o
-	$(FC) $(CPPFLAGS) $(FCFLAGS) $< util.o -o $@
+	$(FC) $(CPPFLAGS) $(FCFLAGS) $< util.o -o $@ $(LDFLAGS)
 
 clean:
 	rm -f $(BENCHMARKS) *.cub *.ptx *.o *.mod
