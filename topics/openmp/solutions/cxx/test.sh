@@ -10,6 +10,6 @@ for threads in 1 2 4 8 12
 do
     echo "============  $threads threads ============"
     export OMP_NUM_THREADS=$threads
-    srun -n1 -Cgpu -c$threads --hint=nomultithread $executable
+    srun -pdebug -t5 -Cgpu -n1 -c$threads --hint=nomultithread $executable
 done
 
